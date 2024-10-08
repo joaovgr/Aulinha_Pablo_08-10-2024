@@ -1,0 +1,73 @@
+#AULA DE TRATAMENTO DE DADOS NO KAGGLE
+___________________________________________________________________
+#Importando as bibliotecas
+
+import numpy as np
+import pandas as pd
+___________________________________________________________________
+#Exibindo as primeiras 10 linhas
+df = pd.read_csv('/kaggle/input/datagame/Video_Game_Dataset.csv')
+df.head(10)
+___________________________________________________________________
+#Verificando o número de colunas e Linhas
+df.info()
+___________________________________________________________________
+#Verificar se os valores nulos foram preenchidos
+
+df.isnull().sum()
+___________________________________________________________________
+#Calculando a moda, média, mediana e desvio padrão
+
+
+media = df['Installations'].mean()
+mediana = df['Installations'].median()
+moda = df['Installations'].mode()[0]  
+desvio_padrao = df['Installations'].std()
+
+print(f"Média: {media:.2f}")
+print(f"Mediana: {mediana:.2f}")
+print(f"Moda: {moda:.2f}")
+print(f"Desvio Padrão: {desvio_padrao:.2f}")
+_____________________________________________________________________________________
+#Jogo mais caro e mais barato e exibir os códigos
+
+j_mais_caro = df[df['Price (USD)'] == df['Price (USD)'].max()]
+j_mais_barato = df[df['Price (USD)'] == df['Price (USD)'].min()]
+
+print("Jogo mais caro:")
+print(j_mais_caro[['Game', 'Price (USD)']])
+print()
+print("Jogo mais barato:")
+print(j_mais_barato[['Game', 'Price (USD)']])
+________________________________________________________________________________________
+#Calculando a mediana, média, valor mínimo e valor máximo da coluna GamePlay Time (Hours)
+
+media_game = df['Gameplay Time (Hours)'].mean()
+meidana_game = df['Gameplay Time (Hours)'].median()
+minina_game = df['Gameplay Time (Hours)'].min()    
+maxima_game = df['Gameplay Time (Hours)'].max()
+
+print(f"Média do tempo de gameplay: {media_game:.2f} horas")
+print(f"Mediana do tempo de gameplay: {meidana_game:.2f} horas")
+print(f"Tempo mínimo de gameplay: {minina_game:.2f} horas")
+print(f"Tempo máximo de gameplay: {maxima_game:.2f} horas")
+__________________________________________________________________________
+#Distribiução dos jogos por plataforma e qual plataforma contém mais jogos
+distribuicao_pt = platform_distribution = df['Platform'].value_counts()
+print("Distribuição de jogos por plataforma:")
+print(distribuicao_pt)
+
+jogo = platform_distribution.idxmax()
+qtd_jogo = platform_distribution.max()
+print(f"Plataforma com mais jogos: {jogo} ({qtd_jogo} jogos)")
+_________________________________________________________
+#Soma de instalção por gênero
+g_instalacao = df.groupby('Genre')['Installations'].sum()
+print("Soma total de instalações por gênero:")
+print(g_instalacao)
+___________________________________________________
+#Top 3 desenvolvedores
+empdesl = df['Developer'].value_counts()
+top3empdesl = developer_game_count.head(3)
+print("Top 3 desenvolvedores que lançaram mais jogos:")
+print(top3empdesl)
